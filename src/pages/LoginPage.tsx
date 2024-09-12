@@ -1,16 +1,37 @@
 import React, { useState } from 'react';
-import { Box, Tabs, Tab, TextField, Button, Typography, ThemeProvider, createTheme } from '@mui/material';
-import { colors, messages } from '../locales'
+import { Box, Tabs, Tab, TextField, Button, Typography } from '@mui/material';
+import { colors, messages } from '../locales';
+import axios from '../utils/axios';
+import { useNavigate } from 'react-router-dom';
+import paths from '../routes/paths';
 
-const LOGIN_MODE_EMAIL = 'M';
-const LOGIN_MODE_PHONE = 'T';
+const LOGIN_MODE_EMAIL = 'email';
+const LOGIN_MODE_PHONE = 'phone';
 
 const Login = () => {
+  const [identifier_type, setIdentifier_type] = useState(LOGIN_MODE_EMAIL);
+  const [identifier, setIdentifier] = useState('');
+  const navigate = useNavigate();
 
-  const [value, setValue] = useState(LOGIN_MODE_EMAIL);
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('/verifyUser',
+        { identifier: identifier, identifier_type: identifier_type },
+      );
+      const status=response.status;
+      if (status === 200)
+        navigate(`/${paths.ENTER_CODE}`)
+    } catch (error) {
+      navigate(`/${paths.USER_NOT_FOUND}`)
+    }
+  };
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setIdentifier_type(newValue);
+  };
+
+  const handleInputChange = (event) => {
+    setIdentifier(event.target.value);
   };
 
   return (
@@ -36,7 +57,7 @@ const Login = () => {
           {messages.login.LOGIN_TITLE}
         </Typography>
         <Tabs
-          value={value}
+          value={identifier_type}
           onChange={handleChange}
           aria-label="login tabs"
           sx={{
@@ -56,13 +77,15 @@ const Login = () => {
           <Tab value={LOGIN_MODE_EMAIL} label="מייל" />
           <Tab value={LOGIN_MODE_PHONE} label="טלפון" />
         </Tabs>
-        {value === LOGIN_MODE_EMAIL && (
+        {identifier_type === LOGIN_MODE_EMAIL && (
           <Box>
             <TextField
               label="מייל"
               variant="outlined"
               fullWidth
               margin="normal"
+              value={identifier}
+              onChange={handleInputChange}
               sx={{
                 '& .MuiOutlinedInput-root': {
                   '& fieldset': {
@@ -93,18 +116,21 @@ const Login = () => {
                 marginTop: 2
               }}
               fullWidth
+              onClick={handleLogin}
             >
               {messages.login.LOGIN_WITH_EMAIL}
             </Button>
           </Box>
         )}
-        {value === LOGIN_MODE_PHONE && (
+        {identifier_type === LOGIN_MODE_PHONE && (
           <Box>
             <TextField
               label="מספר טלפון"
               variant="outlined"
               fullWidth
               margin="normal"
+              value={identifier}
+              onChange={handleInputChange}
               sx={{
                 '& .MuiOutlinedInput-root': {
                   '& fieldset': {
@@ -136,6 +162,7 @@ const Login = () => {
                 backgroundColor: colors.BLUE_COLOR,
                 marginTop: 2
               }}
+              onClick={handleLogin}
             >
               {messages.login.LOGIN_WITH_PHONE}
             </Button>
@@ -147,4 +174,3 @@ const Login = () => {
 };
 
 export default Login;
-

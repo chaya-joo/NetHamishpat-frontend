@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import paths from "../routes/paths";
 
+
 const UploadFilePage = () => {
 
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -24,8 +25,9 @@ const UploadFilePage = () => {
     }
 
     const handleSendClick = () => {
-        
-      navigate(`/${paths.LOAD}`)
+        const formData = new FormData();
+        if (selectedFile) { formData.append('file', selectedFile); }
+        navigate(`/${paths.LOAD}`,{ state: { file: selectedFile } })
     }
 
     return (

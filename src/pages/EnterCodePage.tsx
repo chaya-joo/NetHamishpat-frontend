@@ -4,19 +4,24 @@ import Cookies from 'js-cookie';
 import { colors, messages } from '../locales'
 import axios from '../utils/axios';
 import paths from "../routes/paths";
+import { setToken } from "../auth/utils";
+import { verifyCodeService } from "../services/loginService";
 
 const EnterCode = () => {
     const location = useLocation();
-    const { identifier, code } = location.state|| {};
-    const navigate=useNavigate()
+    const { identifier, code } = location.state || {};
+    const navigate = useNavigate()
 
-    const handleVerifyCode = async() => {
-        const response = await axios.post('/verifyCode',
-            { identifier: identifier, code: code }
-        );
-        const token = response.data.token;
-        localStorage.setItem('jwt',token)
-        navigate(`/${paths.CHOOSE_ACTION}`)
+    const handleVerifyCode = async () => {
+        try {
+            const response = await verifyCodeService(identifier, code)
+            const token = response.data.token;
+            setToken(token)
+            navigate(`/${paths.CHOOSE_ACTION}`)
+        }
+        catch (error) {
+            console.error(error)
+        }
     }
 
     return (

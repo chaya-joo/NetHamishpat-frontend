@@ -4,6 +4,7 @@ import { colors, messages } from '../locales';
 import axios from '../utils/axios';
 import { useNavigate } from 'react-router-dom';
 import paths from '../routes/paths';
+import { verifyUserService } from '../services/loginService';
 
 const LOGIN_MODE_EMAIL = 'email';
 const LOGIN_MODE_PHONE = 'phone';
@@ -16,13 +17,9 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('/verifyUser',
-        { identifier: identifier, identifier_type: identifier_type },
-      );
-      const status = response.status;
+      const response = await verifyUserService(identifier,identifier_type);
       const code = response.data.code || null;
-      console.log("code: "+code)
-      if (status === 200) {
+      if (response.status === 200) {
         navigate(`/${paths.ENTER_CODE}`, {
           state: {
             identifier: identifier,

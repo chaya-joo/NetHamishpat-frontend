@@ -1,10 +1,12 @@
-import React from 'react';
 import './App.css';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './routes/router';
+import InitializedAuth from './auth/InitializedAuth';
 function App() {
-  return (
+  return (<>
+    <InitializedAuth/>
     <RouterProvider router={router}/>
+    </>
   );
 }
 

@@ -37,7 +37,6 @@ const NotFoundPage = () => {
         component="h2"
         sx={{
           textAlign: 'center',
-          color: 'text.secondary',
           marginBottom: 3, 
           color:colors.BLUE_COLOR
         }}

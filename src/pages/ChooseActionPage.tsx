@@ -1,7 +1,23 @@
 import { Box, Typography, TextField, Button, Stack } from "@mui/material"
 import { colors, messages } from '../locales'
+import { getToken } from "../auth/utils"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import path from "path"
+import paths from "../routes/paths"
 
 const ChooseAction = () => {
+
+    const navigate = useNavigate()
+
+    const handleClickUploadFile = () => {
+        navigate(`/${paths.UPLOAD_FILE}`)
+    }
+
+    const handleCaseDetailsClick = () => {
+        navigate(`/${paths.CASE_DETAILS}`)
+    }
+
     return (
         <Box
             sx={{
@@ -14,7 +30,7 @@ const ChooseAction = () => {
             }}
         >
             <Typography
-                variant="h6"
+                variant="h5"
                 component="h1"
                 sx={{
                     marginBottom: 2,
@@ -26,26 +42,34 @@ const ChooseAction = () => {
             </Typography>
             <Stack
                 direction="row"
-                spacing={2}
+                spacing={1}
                 sx={{
                     width: '100%',
                     maxWidth: 400,
                 }}
             >
+                <div>
+                    <Button
+                        variant="contained"
+                        sx={{
+                            backgroundColor: colors.BLUE_COLOR,
+                            flex: 1,
+                            whiteSpace: 'nowrap',
+                            width: 200,
+                        }}
+                        onClick={handleClickUploadFile}
+                    >
+                        {messages.actions.UPLOAD_DOCUMENTION}
+                    </Button>
+                </div>
                 <Button
                     variant="contained"
+                    onClick={handleCaseDetailsClick}
                     sx={{
                         backgroundColor: colors.BLUE_COLOR,
                         flex: 1,
-                    }}
-                >
-                    {messages.actions.UPLOAD_DOCUMENTION}
-                </Button>
-                <Button
-                    variant="contained"
-                    sx={{
-                        backgroundColor: colors.BLUE_COLOR,
-                        flex: 1,
+                        width: 200,
+                        whiteSpace: 'nowrap',
                     }}
                 >
                     {messages.actions.DETAILS_OF_CASE}

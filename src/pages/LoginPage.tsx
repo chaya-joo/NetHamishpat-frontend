@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Tabs, Tab, TextField, Button, Typography } from '@mui/material';
 import { colors, messages } from '../locales';
 import axios from '../utils/axios';
@@ -9,6 +9,7 @@ const LOGIN_MODE_EMAIL = 'email';
 const LOGIN_MODE_PHONE = 'phone';
 
 const Login = () => {
+
   const [identifier_type, setIdentifier_type] = useState(LOGIN_MODE_EMAIL);
   const [identifier, setIdentifier] = useState('');
   const navigate = useNavigate();
@@ -18,19 +19,27 @@ const Login = () => {
       const response = await axios.post('/verifyUser',
         { identifier: identifier, identifier_type: identifier_type },
       );
-      const status=response.status;
-      if (status === 200)
-        navigate(`/${paths.ENTER_CODE}`)
+      const status = response.status;
+      const code = response.data.code || null;
+      console.log("code: "+code)
+      if (status === 200) {
+        navigate(`/${paths.ENTER_CODE}`, {
+          state: {
+            identifier: identifier,
+            code: code
+          }
+        });
+      }
     } catch (error) {
       navigate(`/${paths.USER_NOT_FOUND}`)
     }
   };
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (event:any, newValue:any) => {
     setIdentifier_type(newValue);
   };
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     setIdentifier(event.target.value);
   };
 

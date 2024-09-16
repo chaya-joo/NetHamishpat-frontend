@@ -1,7 +1,24 @@
 import { Box, Typography, TextField, Button } from "@mui/material"
+import { useLocation, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { colors, messages } from '../locales'
+import axios from '../utils/axios';
+import paths from "../routes/paths";
 
 const EnterCode = () => {
+    const location = useLocation();
+    const { identifier, code } = location.state|| {};
+    const navigate=useNavigate()
+
+    const handleVerifyCode = async() => {
+        const response = await axios.post('/verifyCode',
+            { identifier: identifier, code: code }
+        );
+        const token = response.data.token;
+        localStorage.setItem('jwt',token)
+        navigate(`/${paths.CHOOSE_ACTION}`)
+    }
+
     return (
         <Box
             sx={{
@@ -14,7 +31,7 @@ const EnterCode = () => {
             }}
         >
             <Typography
-                variant="h6"
+                variant="h4"
                 component="h1"
                 sx={{
                     marginBottom: 2,
@@ -23,6 +40,17 @@ const EnterCode = () => {
                 }}
             >
                 {messages.login.ENTER_CODE_TITLE}
+            </Typography>
+            <Typography
+                variant="h6"
+                component="h1"
+                sx={{
+                    marginBottom: 2,
+                    textAlign: 'center',
+                    color: colors.BLUE_COLOR
+                }}
+            >
+                {messages.login.ENTER_CODE_TEXT}
             </Typography>
             <TextField
                 label="קוד"
@@ -58,6 +86,7 @@ const EnterCode = () => {
                 sx={{
                     backgroundColor: colors.BLUE_COLOR,
                 }}
+                onClick={handleVerifyCode}
             >
                 {messages.login.ENTER_CODE_SEND}
             </Button>

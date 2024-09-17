@@ -1,4 +1,4 @@
-# React TypeScript Project with Axios and React Router DOM
+# React TypeScript Project with MUI, Axios, React Router DOM and more
 
 ## Overview
 
@@ -29,6 +29,13 @@ This project is a client-side web application built with **React** and **TypeScr
 
 - **Usage**: Managing navigation and rendering different components based on the current route.
 - **Why React Router DOM?**: It provides a robust and flexible routing solution for single-page applications, enabling seamless navigation and deep linking.
+
+### 5. MUI (Material-UI)
+MUI (formerly Material-UI) is a popular React UI framework that implements Google's Material Design. It provides a comprehensive set of components and styles that help create visually appealing and consistent user interfaces.
+
+- **Usage**: Building and styling user interface components with Material Design principles. MUI includes a variety of components like buttons, cards, dialogs, and more, which can be easily customized and integrated into the application.
+- **Why MUI?**: MUI offers a rich set of pre-designed components that follow Material Design guidelines, making it easier to create a modern, responsive UI. It also provides robust theming and customization options, allowing developers to maintain consistency across the application.
+
 
 ## Installation
 

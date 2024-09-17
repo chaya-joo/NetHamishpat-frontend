@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material"
 import { useLocation, useNavigate } from "react-router-dom";
 import { colors, messages } from "../locales"
 import { useEffect } from "react";
-import axios from '../utils/axios';
+import axios from '../axios/axios';
 import { getToken, removeToken } from "../auth/utils";
 import uploadFileService from "../services/uploadFileService";
 import paths from "../routes/paths";
@@ -18,11 +18,8 @@ const LoadPage = () => {
             try {
                 const response = await uploadFileService(file);
                 if (response.status == 200)
-                    setTimeout(() => {
-                        navigate(`/${paths.SENT_SUCCESSFULLY}`);
-                    }, 3000);
-                if(response.status == 401)
-                {
+                    navigate(`/${paths.SENT_SUCCESSFULLY}`);
+                if (response.status == 401) {
                     removeToken();
                     navigate(`/${paths.LOGIN}`)
                 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Tabs, Tab, TextField, Button, Typography } from '@mui/material';
 import { colors, messages } from '../locales';
-import axios from '../utils/axios';
+import axios from '../axios/axios';
 import { useNavigate } from 'react-router-dom';
 import paths from '../routes/paths';
 import { verifyUserService } from '../services/loginService';

@@ -9,6 +9,7 @@ import LoadPage from '../pages/LoadPages'
 import SentSuccessfullyPage from '../pages/SentSuccessfullyPage'
 import CaseDetailsPage from '../pages/CaseDetailsPage'
 
+
 export const router = createBrowserRouter(
     [
         {
@@ -29,11 +30,11 @@ export const router = createBrowserRouter(
         },
         {
             path: paths.CHOOSE_ACTION,
-            element: <ChooseAction />
+            element:<ChooseAction />
         },
         {
             path: paths.UPLOAD_FILE,
-            element: <UploadFilePage />
+            element:<UploadFilePage />
         },
         {
             path: paths.LOAD,

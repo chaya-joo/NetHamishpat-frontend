@@ -24,6 +24,9 @@ export const messages = {
             SELECTED_FILE: 'נבחר מסמך: ',
             LOAD_MESSAGE:'...שולח',
             SENT_SECCESSFULLY_TITLE:'!הדף נשלח בהצלחה',
+        },
+        caseDetails:{
+        CASE_DETAILS_TITLE:':פרטי תיק',
         }
     }
 }

@@ -2,7 +2,7 @@ import { Box, Typography, TextField, Button } from "@mui/material"
 import { useLocation, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { colors, messages } from '../locales'
-import axios from '../utils/axios';
+import axios from '../axios/axios';
 import paths from "../routes/paths";
 import { setToken } from "../auth/utils";
 import { verifyCodeService } from "../services/loginService";

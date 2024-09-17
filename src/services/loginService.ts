@@ -1,4 +1,4 @@
-import axios from "../utils/axios";
+import axios from "../axios/axios";
 
 
 export const verifyUserService=async(identifier:string,identifier_type:string)=>{

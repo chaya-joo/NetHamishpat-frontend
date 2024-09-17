@@ -65,7 +65,17 @@ To run this project locally, follow these steps:
 ## Usage
 
 ### Routing
-The application uses React Router DOM to manage routing. Routes are defined in the `App.tsx` file, and each route maps to a specific component. Navigation between pages is handled using `<Link>` components and `useNavigate` hooks.
+The application uses React Router DOM to manage routing. The following routes are defined:
+
+- **`/`**: Redirects to the login page (`paths.LOGIN`).
+- **`/login`**: Renders the `Login` component, which handles user authentication.
+- **`/user-not-found`**: Renders the `UserNotFound` component, shown when a user cannot be found.
+- **`/enter-code`**: Renders the `EnterCode` component, where users enter verification codes.
+- **`/choose-action`**: Renders the `ChooseAction` component, allowing users to select further actions.
+- **`/upload-file`**: Renders the `UploadFilePage` component, enabling file uploads.
+- **`/load`**: Renders the `LoadPage` component, typically used for loading screens or progress indications.
+- **`/sent-successfully`**: Renders the `SentSuccessfullyPage` component, confirming successful submissions.
+- **`/case-details`**: Renders the `CaseDetailsPage` component, showing detailed information about specific cases.
 
 ### API Requests
 Axios is used to make API requests. Create an `axios` instance in `axiosInstance.ts` to configure default settings and handle request/response interceptors. Use this instance to perform HTTP operations in your components or services.
@@ -90,6 +100,8 @@ const fetchData = async () => {
     console.error('Error fetching data', error);
   }
 };
+```
+```typescript
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';

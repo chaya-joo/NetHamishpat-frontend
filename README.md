@@ -103,10 +103,11 @@ const App = () => (
   </Router>
 );
 
-Error Handling
+```
+# Error Handling
 
 The project implements error handling for both API requests and routing. Axios interceptors are used to handle errors globally and provide feedback to the user. React Router DOM is used to display custom error pages for non-existent routes.
 
-Conclusion
+# Conclusion
 
 This project demonstrates how to build a React application with TypeScript, Axios, and React Router DOM. It showcases how to manage routing, handle HTTP requests, and leverage TypeScript for improved development efficiency and code quality. The use of these libraries and tools ensures a robust and scalable client-side applicatio
